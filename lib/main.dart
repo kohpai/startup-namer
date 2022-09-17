@@ -53,11 +53,12 @@ class _RandomWordsState extends State<RandomWords> {
             if (index >= _suggestions.length) {
               _suggestions.addAll(generateWordPairs().take(10));
             }
-            final alreadySaved = _saved.contains(_suggestions[index]);
+            var currentPair = _suggestions[index];
+            final alreadySaved = _saved.contains(currentPair);
 
             return ListTile(
               title: Text(
-                _suggestions[index].asPascalCase,
+                currentPair.asPascalCase,
                 style: _biggerFont,
               ),
               trailing: Icon(
@@ -68,9 +69,9 @@ class _RandomWordsState extends State<RandomWords> {
               onTap: () {
                 setState(() {
                   if (alreadySaved) {
-                    _saved.remove(_suggestions[index]);
+                    _saved.remove(currentPair);
                   } else {
-                    _saved.add(_suggestions[index]);
+                    _saved.add(currentPair);
                   }
                 });
               },
